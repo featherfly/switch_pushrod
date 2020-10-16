@@ -1,0 +1,19 @@
+{
+	"name": "SwitchPushrod",
+	"keywords": "motor, pushrod, switch, AVR, ESP8266",
+	"description": "SwitchPushrod is lib for motor pushrod with switch.",
+	"version": "1.0.0",
+	"authors": {
+		"name": "zhongj",
+		"url": "https://github.com/featherfly",
+		"maintainer": true
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/featherfly/switch_pushrod"
+	},
+	"homepage": "https://github.com/featherfly/switch_pushrod/",
+	"frameworks": ["arduino"],
+	"platforms": "*",
+	"examples": "examples/*/*.ino"
+}
