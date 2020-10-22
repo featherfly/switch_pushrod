@@ -13,7 +13,22 @@
 		"url": "https://github.com/featherfly/switch_pushrod"
 	},
 	"homepage": "https://github.com/featherfly/switch_pushrod/",
-	"frameworks": ["arduino"],
+	"frameworks": [
+		"arduino"
+	],
 	"platforms": "*",
-	"examples": "examples/*/*.ino"
+	"examples": "examples/*/*.ino",
+	"build": {
+		"srcDir": "src"
+	},
+	"dependencies": [
+		{
+			"name": "ArduinoLog",
+			"version": "*"
+		},
+		{
+			"name": "gpio_commons",
+        	"version": "https://github.com/featherfly/gpio_commons.git"
+		}
+	]
 }
