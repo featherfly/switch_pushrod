@@ -19,41 +19,48 @@ void SwitchPushrod::setPushrod(Pushrod *_pushrod)
 {
     pushrod = _pushrod;
 }
-void SwitchPushrod::setStart(Switch *_start)
+void SwitchPushrod::setStartSwitch(Switch *_start)
 {
     start = _start;
 }
-void SwitchPushrod::setSwitch(Switch *_end)
+void SwitchPushrod::setEndSwitch(Switch *_end)
 {
     end = _end;
 }
-void SwitchPushrod::forward()
+int SwitchPushrod::forward()
 {
-    steps = 0;
+    _steps = 0;
     pushrod->resetStep();
-    while (end->isOpen())
+    while (end->is_on())
     {
         pushrod->forward(1);
-        steps++;
-        if (user_onStep(steps, STEP_FORWARD) == EVENT_STEP_STOP)
+        _steps++;
+        if (user_onStep(_steps, STEP_FORWARD) == EVENT_STEP_STOP)
         {
             break;
         }
     }
+    return _steps;
 }
-void SwitchPushrod::backward()
+int SwitchPushrod::backward()
 {
-    steps = 0;
+    _steps = 0;
     pushrod->resetStep();
-    while (start->isOpen())
+    while (start->is_on())
     {
         pushrod->backward(1);
-        steps++;
-        if (user_onStep(steps, STEP_BACKWARD) == EVENT_STEP_STOP)
+        _steps++;
+        if (user_onStep(_steps, STEP_BACKWARD) == EVENT_STEP_STOP)
         {
             break;
         }
     }
+    return _steps;
+}
+
+int SwitchPushrod::steps()
+{
+    return _steps;
 }
 
 void SwitchPushrod::onStep(int (*function)(int, bool))

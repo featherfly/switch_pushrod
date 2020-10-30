@@ -12,7 +12,7 @@
 class SwitchPushrod
 {
 private:
-    int steps = 0;
+    int _steps = 0;
     Pushrod *pushrod = &Pushrod();
     Switch *start = &Switch(&Pin(-1, INPUT));
     Switch *end = &Switch(&Pin(-1, INPUT));    
@@ -22,10 +22,17 @@ public:
     SwitchPushrod(Pushrod *_pushrod, Switch *_start, Switch *_end);
     void setup(Pushrod *_pushrod, Switch *_start, Switch *_end);
     void setPushrod(Pushrod *_pushrod);
-    void setStart(Switch *_start);
-    void setSwitch(Switch *_end);
-    void forward();
-    void backward();
+    void setStartSwitch(Switch *_start);
+    void setEndSwitch(Switch *_end);
+    /**
+     * @return steps
+     */
+    int forward();
+    /**
+     * @return steps
+     */
+    int backward();
+    int steps();
     void onStep(int (*)(int, bool));
 };
 #endif
