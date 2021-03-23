@@ -17,7 +17,8 @@ Pushrod_A4988::Pushrod_A4988(int _dirPin, int _stepPin, int _enablePin, bool _fo
     digitalWrite(stepPin, LOW);
     if (enablePin >= 0) {
         pinMode(enablePin, OUTPUT); 
-        digitalWrite(enablePin, LOW);
+        // 关闭使能
+        disable();
     }
     Log.notice(F("dirPin %d, stepPin %d, enablePin %d, forwardState %T" CR), dirPin, stepPin, enablePin, forwardState);
 }
@@ -26,6 +27,8 @@ void Pushrod_A4988::go(bool direction, unsigned int step)
 {
     Log.trace(F("dirPin %d, stepPin %d, enablePin %d, forwardState %T, direction %T" CR), dirPin, stepPin, enablePin, forwardState, direction);
     digitalWrite(dirPin, direction); // Set Dir forward
+    // 打开使能
+    enable();
     for (unsigned int i = 0; i < step; i++)
     {
         digitalWrite(stepPin, HIGH); // Output high
@@ -33,6 +36,8 @@ void Pushrod_A4988::go(bool direction, unsigned int step)
         digitalWrite(stepPin, LOW);  // Output low
         delayMicroseconds(800);      // Wait 1/2 a ms
     }
+    // 关闭使能
+    disable();
 }
 void Pushrod_A4988::forward(unsigned int step)
 {
